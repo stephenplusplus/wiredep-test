@@ -1,0 +1,11 @@
+{
+  "name": "wiredep-test",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "multiline": "^0.2.0",
+    "chalk": "^0.4.0",
+    "wiredep": "^1.4.3"
+  }
+}
