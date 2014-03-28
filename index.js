@@ -1,6 +1,6 @@
-var mod = require('modmod')('fs', 'chalk', 'util', 'wiredep', 'multiline');
+var M = require('modmod')('fs', 'chalk', 'util', 'wiredep', 'multiline');
 
-module.exports = mod.multiline(function () {/*
+module.exports = M.multiline(function () {/*
 <!-- bower:css -->
 <!-- endbower -->
 
@@ -8,21 +8,23 @@ module.exports = mod.multiline(function () {/*
 <!-- endbower -->
 */});
 
-mod.fs.watchFile(__filename, { interval: 0 }, function () {
+M.fs.watchFile(__filename, { interval: 1000 }, function () {
   delete require.cache[__filename];
 
-  console.log(mod.chalk.red.bold('\n\nresults.'));
-  console.log(mod.chalk.blue(require(__filename)));
+  console.log(M.chalk.red.bold('\n\nresults.'));
+  console.log(M.chalk.blue(require(__filename)));
 
   // reset file.
-  mod.fs.unwatchFile(__filename);
-  mod.wiredep({
+  M.fs.unwatchFile(__filename);
+  M.wiredep({
     src: __filename,
     bowerJson: { dependencies: {} }
   });
 });
 
-console.log(mod.chalk.red.bold('\n\ndependency tree.'));
-console.log(mod.util.inspect(mod.wiredep({
-  src: __filename
-}), false, null));
+if (module.exports.length < 100) {
+  console.log(M.chalk.red.bold('\n\ndependency tree.'));
+  console.log(M.util.inspect(M.wiredep({
+    src: __filename
+  }), false, null));
+}
